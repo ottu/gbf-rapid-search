@@ -1,5 +1,3 @@
-![demo](images/demo.png) 
-
 # グラブルTwitter救援検索ツール on Command Line
 
 コマンドラインで動くグラブルTwitter救援検索ツール．  
@@ -10,15 +8,24 @@ IDをコピーするためのクリック動作が不要なため，同種の<st
 ## 使用方法
 
 ```
-python search.py level name
+python search.py Lv=<level>+Name=<name> Lv=<level> Name=<Name>
 ```
 ### 例
 
 ```
-python search.py 75 シュヴァリエ・マグナ
+python search.py Lv=120+Name=エウロペ Lv=100 Name=アーカーシャ
 ```
 + 取得したツイートがコマンドラインに表示され，同時に参戦IDがクリップボードにコピーされます．
 + 終了するときは`Ctrl+C`を押してください．
+
+## フォーク元からの変更点
+
+- 検索対象を複数指定出来るようになってます.
+- Lv=\<level\>+Name=\<name\> のフォーマットです.
+	- 上記オプションは(Lv and Name)検索です.
+		- Lvは`一致するもの`を対象にします.
+		- Nameは`含むもの`を対象にします.
+	- どちらかのみを指定した場合は、それぞれに一致する全てのマルチが対象になります.
 
 ## 必要なもの
 + Python3.x
