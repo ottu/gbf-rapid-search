@@ -44,11 +44,21 @@ def parseText(text):
         res = patternID.match(line)
         if res:
             result["ID"] = res.group(1)
+            continue
 
         res = patternLvName.match(line)
         if res:
             result["Lv"] = res.group(1)
             result["Name"] = res.group(2)
+            break
+
+        if "四大天司ＨＬ" in line:
+            result["Name"] = "四大天司ＨＬ"
+            break
+
+        if "黄龍・黒麒麟HL" in line:
+            result["Name"] = "黄龍・黒麒麟HL"
+            break
 
     return result
 
@@ -94,12 +104,12 @@ def main():
 
                 pt = parseText(tweet.get('text'))
                 #print(pt)
-                if ("ID" in pt) and ("Lv" in pt) and ("Name" in pt):
+                if ("ID" in pt) and ("Name" in pt):
                     if args == []:
                         set_clipboard(pt["ID"], os_name)
                     else:
                         for arg in args:
-                            checkLv = arg["Lv"] == pt["Lv"] if "Lv" in arg else True
+                            checkLv = arg["Lv"] == pt["Lv"] if ("Lv" in arg) and ("Lv" in pt) else True
                             checkName = arg["Name"] in pt["Name"] if "Name" in arg else True
 
                             if checkLv and checkName:
